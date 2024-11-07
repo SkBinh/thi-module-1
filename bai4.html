@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 10px;
+        text-align: center;
+    }
+    thead {
+        background-color: #f2f2f2;
+    }
+</style>
+<body>
+    <h1>Quản lý công nhân</h1>
+    <table id="workerTable">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Họ và Tên</th>
+                <th>Ngày sinh</th>
+                <th>Địa chỉ</th>
+                <th>Lương</th>
+                <th>Chức vụ</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        class Worker {
+            constructor(stt, name, dob, address, salary, position) {
+                this.stt = stt;
+                this.name = name;
+                this.dob = dob;
+                this.address = address;
+                this.salary = salary;
+                this.position = position;
+            }
+
+            getRow() {
+                return `
+                    <tr>
+                        <td>${this.stt}</td>
+                        <td>${this.name}</td>
+                        <td>${this.dob}</td>
+                        <td>${this.address}</td>
+                        <td>${this.salary}</td>
+                        <td>${this.position}</td>
+                    </tr>
+                `;
+            }
+        }
+
+        const workers = [
+            new Worker(1, "Nguyễn Văn A", "01/01/1990", "Hà Nội", "10.000.000 VND", "Kỹ sư"),
+            new Worker(2, "Trần Thị B", "15/05/1985", "Hồ Chí Minh", "8.000.000 VND", "Lao động phổ thông"),
+            new Worker(3, "Lê Quang C", "20/10/1980", "Đà Nẵng", "12.000.000 VND", "Quản lý"),
+            new Worker(4, "Phan Thị D", "05/07/1995", "Cần Thơ", "9.000.000 VND", "Kế toán")
+        ];
+
+        function renderTable() {
+            const tableBody = document.querySelector("#workerTable tbody"); 
+            tableBody.innerHTML = ""; 
+            workers.forEach(worker => {
+                tableBody.innerHTML += worker.getRow();  
+            });
+        }
+        renderTable(); 
+    </script>
+</body>
+</html>

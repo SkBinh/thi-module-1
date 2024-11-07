@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function isLeepYear(year) {
+            if (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0) {
+                return true;        
+            }
+        }
+        function dayOfMonth(month, year) {
+            if (month === 2 && isLeepYear(year)) {
+                return 29;
+            }else if (month === 2 && !isLeepYear(year)) {
+                return 28;
+            }else if (month === 4 || month === 6 || month === 9 || month === 11) {
+                return 30;
+            }else {
+                return 31;
+            }
+        }
+        function isValidDateFormat(input) {
+            if (input.length !== 7 || input[2] !== '/') {
+                return false;
+            }     
+            let parts = input.split('/');
+            let month = parseInt(parts[0], 10);  
+            let year = parseInt(parts[1], 10);   
+            if (isNaN(month) || isNaN(year)) {
+                return false;
+            }
+            if (month < 1 || month > 12 || year < 1000 || year > 9999) {
+                return false;
+            }
+            return true;
+        }
+        function calDayOfMonth(){
+            let input = prompt("Nhập tháng năm theo định dạng MM/yyyy: ");
+            if (!isValidDateFormat(input)) {
+                alert("Nhập tháng năm theo định dạng MM/yyyy");
+                return;
+            }        
+            input = input.split("/");
+            let month = parseInt(input[0], 10);
+            let year = parseInt(input[1], 10);
+            let day = dayOfMonth(month, year);
+            alert("Tháng " + month + " năm " + year + " có " + day + " ngày");
+        }
+        calDayOfMonth();
+    </script>
+</body>
+</html>

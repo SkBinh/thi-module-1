@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Quản lí mảng</h1>
+    <button onclick="addNumber()">Thêm phần tử vào mảng</button>
+    <button onclick="displayResults()">Hiển thị kết quả</button>
+
+    <p id="arrayDisplay"></p>
+    <p id="averageResult"></p>
+
+    <script>
+        let arr = []; 
+        function addNumber() {
+            if (arr.length >= 50) {
+                alert("Mảng đã có tối đa 50 phần tử!");
+                return;
+            }
+
+            let num = parseInt(prompt("Nhập một số nguyên:"));
+            if (isNaN(num)) {
+                alert("Vui lòng nhập một số nguyên hợp lệ!");
+                return;
+            }
+            arr.push(num);
+            displayResults();
+        }
+        function displayResults() {
+            let sum = 0;
+            let count = 0;
+            let validNumbers = [];
+
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] % 3 === 0) {
+                    validNumbers.push(arr[i]);
+                    sum += arr[i];
+                    count++;
+                }
+            }
+            document.getElementById("arrayDisplay").textContent = "Mảng hiện tại: [" + arr.join(", ") + "]";
+
+            if (count > 0) {
+                let average = sum / count;
+                document.getElementById("averageResult").textContent = "Trung bình cộng các số chia hết cho 3 là: " + average;
+            } else {
+                document.getElementById("averageResult").textContent = "Không có số chia hết cho 3 trong mảng.";
+            }
+        }
+    </script>
+</body>
+</html>
